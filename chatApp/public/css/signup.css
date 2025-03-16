@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap');
+
+/* Genel Ayarlar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    /* Renk Paleti */
+    --primary-color: #3498db;
+    --primary-dark: #2980b9;
+    --secondary-color: #2ecc71;
+    --background-gradient-start: #3498db;
+    --background-gradient-end: #2ecc71;
+    --navbar-bg: rgba(0, 0, 0, 0.6);
+    --card-bg: #34495e;
+    --container-bg: #2c3e50;
+    --input-border: #fff;
+    --input-focus-border: var(--secondary-color);
+    --button-bg: var(--primary-color);
+    --button-hover-bg: var(--primary-dark);
+    --button-text: #fff;
+    --text-color: #fff;
+    --placeholder-color: #fff;
+    --box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    --card-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+    --animation-duration: 15s;
+    --border-radius: 25px;
+    --transition-speed: 0.3s;
+    --link-color: #2ecc71;
+}
+
+body {
+    background: linear-gradient(45deg, var(--background-gradient-start), var(--background-gradient-end));
+    background-size: 400% 400%;
+    animation: gradientAnimation var(--animation-duration) ease infinite;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    transition: background 1s ease;
+}
+
+/* Gradient Animasyonu */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Navbar Styles */
+.navbar {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--navbar-bg);
+    border-radius: 50px;
+    padding: 15px 40px;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.navbar .nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color var(--transition-speed);
+}
+
+.navbar .nav a:hover {
+    color: var(--secondary-color);
+}
+
+/* Container ve Kart Düzeni */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: transparent; /* Arka plan zaten body'de tanımlı */
+}
+
+.box {
+    background: var(--container-bg);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 40px 50px;
+    width: 400px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    
+    z-index: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, var(--background-gradient-start), var(--background-gradient-end));
+    animation: moveBackground 4s linear infinite;
+    opacity: 0.15;
+    z-index: -1;
+    
+}
+
+@keyframes moveBackground {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Kayıt Ol Metni */
+.signup {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-color);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+/* Input Alanları */
+.inputBox,
+.inputBox1 {
+    position: relative;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.inputBox input,
+.inputBox1 input {
+    width: 100%;
+    padding: 15px;
+    background: transparent;
+    border: 2px solid var(--input-border);
+    border-radius: var(--border-radius);
+    color: var(--text-color);
+    font-size: 16px;
+    transition: border-color var(--transition-speed);
+}
+
+.inputBox input::placeholder,
+.inputBox1 input::placeholder {
+    color: var(--placeholder-color);
+    opacity: 0.7;
+}
+
+.inputBox input:focus,
+.inputBox1 input:focus {
+    outline: none;
+    border-color: var(--input-focus-border);
+}
+
+.inputBox input:not(:placeholder-shown) ~ span,
+.inputBox1 input:not(:placeholder-shown) ~ span,
+.inputBox input:focus ~ span,
+.inputBox1 input:focus ~ span {
+    top: -10px;
+    font-size: 12px;
+    color: var(--secondary-color);
+}
+
+.inputBox span,
+.inputBox1 span {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: var(--text-color);
+    pointer-events: none;
+    transition: all var(--transition-speed);
+}
+
+
+/* Buton Stilleri */
+.enter {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: var(--border-radius);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    pointer-events: auto;
+    z-index: 10;
+    position: relative;
+    width: 100%;
+}
+
+.enter:hover {
+    background-color: var(--button-hover-bg);
+    transform: translateY(-3px);
+}
+
+
+
+
+@media (max-width: 500px) {
+    .navbar {
+        flex-direction: column;
+        padding: 15px 20px;
+    }
+
+    .navbar .nav a {
+        margin: 10px 0;
+    }
+
+    .card {
+        width: 90%;
+        padding: 30px 20px;
+    }
+
+    .signup {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+
+    .enter {
+        font-size: 16px;
+        padding: 12px 25px;
+    }
+}

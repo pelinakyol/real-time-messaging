@@ -1,0 +1,88 @@
+/* groups.css */
+
+/* Ana Konteyner */
+.groups-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 80px); /* Navbar yüksekliğini hesaba katarak dikey merkezleme */
+    gap: 40px; /* Kutular arasındaki boşluk */
+    padding: 20px;
+    flex-wrap: wrap; /* Küçük ekranlarda kutuların alt alta gelmesi için */
+}
+
+/* Grup Kutuları */
+.group-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    text-decoration: none;
+    color: var(--text-color);
+    transition: transform var(--transition-speed), background-color var(--transition-speed);
+    position: relative;
+    overflow: hidden;
+}
+
+.group-box:hover {
+    transform: translateY(-5px);
+    background-color: var(--primary-dark);
+    box-shadow: var(--box-shadow);
+}
+
+/* Grup Başlığı */
+.group-header {
+    font-size: 2em;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Grup İçeriği */
+.group-content {
+    font-size: 1.2em;
+    text-align: center;
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .groups-container {
+        gap: 30px;
+    }
+
+    .group-box {
+        width: 180px;
+        height: 180px;
+    }
+
+    .group-header {
+        font-size: 1.8em;
+    }
+
+    .group-content {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 500px) {
+    .groups-container {
+        gap: 20px;
+    }
+
+    .group-box {
+        width: 150px;
+        height: 150px;
+    }
+
+    .group-header {
+        font-size: 1.5em;
+    }
+
+    .group-content {
+        font-size: 0.9em;
+    }
+}

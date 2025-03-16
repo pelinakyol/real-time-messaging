@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat - Chatlasme</title>
+    <link rel="stylesheet" href="/css/chat.css" />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <%-include('./inc/navbar2')%>
+
+    <!-- Chat Wrapper -->
+    <div class="chat-wrap">
+      <div class="users">
+        <div class="title">CHAT</div>
+        <div id="friends-list"></div>
+      </div>
+
+      <div class="chat-box">
+        <div class="info" id="info-box">
+          <p><b></b></p>
+        </div>
+
+        <div id="display" class="display">
+          <div class="chat">
+            <div class="name"><b></b></div>
+            <div id="content" class="content"></div>
+          </div>
+        </div>
+
+        <div class="text-box">
+          <input
+            id="text-box"
+            name="message"
+            placeholder="Mesajınızı yazın"
+            type="text"
+          />
+          <button id="send-button">Gönder</button>
+        </div>
+      </div>
+
+      <div id="callModal" class="modal">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <p>Bir aramanız var!</p>
+            </div>
+            <div class="modal-header">
+              <h2 id="callerName">Arayan Kişi</h2>
+          </div>
+            <div class="modal-footer">
+                <button id="answerButton" >Cevapla</button>
+                <button id="rejectButton" >Reddet</button>
+            </div>
+        </div>
+    </div>
+    
+
+      <div class="add-friend">
+        <div class="voice-call">
+
+
+          <div class="user-call">
+
+            <div class="call-name"></div>
+            <div class="call-status"></div>
+
+          </div>
+          
+          <audio id="remoteAudio" autoplay></audio>
+
+          <button id="ara" style="display: none;">Ara</button>
+          <button id="cevapla" style="display: none;">Cevapla</button>
+          <button id="bitir" style="display: none;">Aramayı Bitir</button>
+
+          <div id="counter" style="display: none;"></div>
+        </div>
+        
+
+        <input
+          id="add-friend-text"
+          placeholder="Yeni Arkadaş Ekle"
+          type="text"
+        />
+        <input id="add-friend-button" type="button" value="BUL" />
+      </div>
+    </div>
+    <div id="context-menu" class="context-menu">
+      <ul>
+        <li id="delete">Kalıcı Sil</li>
+      </ul>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="/script/realChat.js"></script>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<div class="nav-bar">
+  <div class="logo">Chatlasme</div>
+
+  <% let name="" ; if(user){ name=user.username } %>
+
+    <div id="username">
+      <% if (user) { %>
+        <p>Hoşgeldiniz, <b id="only-username">
+            <%= name %>
+          </b></p>
+        <% } %>
+    </div>
+
+    <ul class="menu">
+      <li><a href="/">Ana Sayfa</a></li>
+      <li><a href="/chat">Chat</a></li>
+      <li class="dropdown">
+        <a href="/groups" tabindex="0">Gruplar</a>
+        <div class="dropdown-content" id="group-list">
+          <p id="loading-groups">Gruplar yükleniyor...</p>
+        </div>
+      </li>
+
+      <% if(user) { %>
+        <li><a href="/groupCreate">Grup Kur</a></li>
+
+        <li><a href="/logout">Çıkış Yap</a></li>
+        <% } else { %>
+          <li><a href="/login">Giriş Yap</a></li>
+          <li><a href="/signup">Kayıt Ol</a></li>
+          <% } %>
+    </ul>
+</div>
+
+<style>
+
+
+
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: black;
+    color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .dropdown:hover .dropdown-content,
+  .dropdown:focus .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: white;
+    color: black;
+  }
+
+  @media (max-width: 600px) {
+    .nav-bar ul {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const loadingText = document.getElementById("loading-groups");
+
+
+    fetch("/api/groups")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          const groupListContainer = document.getElementById("group-list");
+          groupListContainer.innerHTML = ""; // Yükleniyor mesajını temizle
+
+          data.groups.forEach((group) => {
+            const groupItem = document.createElement("a");
+            groupItem.href = `/groups/${group._id}/messages`;
+            groupItem.textContent = group.name;
+            groupListContainer.appendChild(groupItem);
+          });
+        } else {
+          loadingText.textContent = "Gruplar alınamadı.";
+        }
+      })
+      .catch((error) => {
+        console.log("Gruplar alınırken bir hata oluştu:", error);
+        loadingText.textContent = "Gruplar yüklenemedi.";
+      });
+  });
+</script>
+
+

@@ -1,0 +1,23 @@
+<div class="nav-bar">
+  <% let name="" ; if(user){ name=user.username } %>
+
+    <div id="username">
+      <% if (user) { %>
+        <p>Hoşgeldiniz, <b>
+            <%= name %>
+          </b></p>
+        <% } %>
+    </div>
+
+    <ul>
+      <li><a href="/">Ana Sayfa</a></li>
+      <li><a href="/chat">Chat</a></li>
+
+      <% if(user) { %>
+        <li><a href="/logout">Çıkış Yap</a></li>
+        <% } else { %>
+          <li><a href="/login">Giriş Yap</a></li>
+          <li><a href="/signup">Kayıt Ol</a></li>
+          <% } %>
+    </ul>
+</div>
